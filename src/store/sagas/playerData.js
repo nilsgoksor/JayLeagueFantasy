@@ -19,14 +19,19 @@ export function* playerDataSaga(action) {
 
       const thisSeason = response.data.current;
       let pointsOnBench = 0;
+      let totalTransfers = 0;
       thisSeason.map(gameweek => {
-        return (pointsOnBench += gameweek.points_on_bench);
+        return (
+          (totalTransfers += gameweek.event_transfers),
+          (pointsOnBench += gameweek.points_on_bench)
+        );
       });
 
       playerData.push({
         id: playerId,
         pastSeason: pastSeason,
-        pointsOnBench: pointsOnBench
+        pointsOnBench: pointsOnBench,
+        totalTransfers: totalTransfers
       });
     } catch (error) {
       yield put(actions.getPlayerDataFail(error));
