@@ -5,8 +5,14 @@ import axios from "../../axios-fantasy";
 export function* leagueDataSaga(action) {
   yield put(actions.getLeagueDataInit());
   const url = "/api/leagues-classic/" + action.leagueId + "/standings/";
+  const config = {
+    headers: {
+      Accept: "application/json",
+      ContentType: "application/json"
+    }
+  };
   try {
-    const response = yield axios.get(url);
+    const response = yield axios.get(url, config);
     const leagueName = response.data.league.name;
     const standings = response.data.standings.results;
     const playerInfo = yield standings.map(player => {

@@ -51,7 +51,7 @@ const getPlayerDataSuccess = (state, action) => {
   let mostTransfers = {};
   let leastTransfers = {};
 
-  playerData.map(player => {
+  action.playerData.map(player => {
     const data = {
       id: player.id,
       pastSeason: {
@@ -59,7 +59,8 @@ const getPlayerDataSuccess = (state, action) => {
         stat: player.pastSeason.total_points,
         rank: player.pastSeason.rank
       },
-      pointsOnBench: player.pointsOnBench
+      pointsOnBench: player.pointsOnBench,
+      totalTransfers: player.totalTransfers
     };
 
     if (parseInt(player.pastSeason.total_points) > mostPointsPastSeason) {
@@ -78,7 +79,7 @@ const getPlayerDataSuccess = (state, action) => {
         player: player.id,
         stat: player.pastSeason.total_points + " points",
         imgSrc:
-          "http://1.bp.blogspot.com/-N3ieX10np_w/UoFZUHeJDXI/AAAAAAAAC1o/OIGWu70lzXw/s1600/philjonesnightmare.jpg"
+          "https://images.wallpaperscraft.com/image/mesut_ozil_arsenal_footballer_99163_1600x900.jpg"
       };
       leastPointsPastSeason = player.pastSeason.total_points;
     }
@@ -116,7 +117,7 @@ const getPlayerDataSuccess = (state, action) => {
       lt = player.totalTransfers;
     }
     if (player.totalTransfers > mt) {
-      leastTransfers = {
+      mostTransfers = {
         title: "Most transfers",
         player: player.id,
         stat: player.totalTransfers + " transfers",
@@ -125,10 +126,10 @@ const getPlayerDataSuccess = (state, action) => {
       };
       mt = player.totalTransfers;
     }
-
     playerData.push(data);
     return data;
   });
+
   playerStats.push(bestPastSeason);
   playerStats.push(worstPastSeason);
   playerStats.push(mostPointsOnBench);

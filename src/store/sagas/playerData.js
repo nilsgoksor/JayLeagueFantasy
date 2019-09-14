@@ -21,10 +21,9 @@ export function* playerDataSaga(action) {
       let pointsOnBench = 0;
       let totalTransfers = 0;
       thisSeason.map(gameweek => {
-        return (
-          (totalTransfers += gameweek.event_transfers),
-          (pointsOnBench += gameweek.points_on_bench)
-        );
+        totalTransfers += gameweek.event_transfers;
+        pointsOnBench += gameweek.points_on_bench;
+        return true;
       });
 
       playerData.push({
