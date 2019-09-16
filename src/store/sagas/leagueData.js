@@ -10,13 +10,12 @@ export function* leagueDataSaga(action) {
   const url = "/api/leagues-classic/" + action.leagueId + "/standings/";
 
   try {
-    fetch(
-      "https://fantasy.premierleague.com/api/leagues-classic/848627/standings/"
-    );
-  } catch (error) {}
-
-  try {
-    const response = yield axios.get(url);
+    const response = yield axios.get(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
     const leagueName = response.data.league.name;
     const standings = response.data.standings.results;
     const playerInfo = yield standings.map(player => {

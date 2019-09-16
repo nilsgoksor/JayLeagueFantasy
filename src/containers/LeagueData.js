@@ -4,6 +4,7 @@ import * as actions from "../store/actions/index";
 import TrendingDown from "@material-ui/icons/TrendingDown";
 import TrendingUp from "@material-ui/icons/TrendingUp";
 import TrendingStale from "@material-ui/icons/Remove";
+import ErrorModal from "../components/UI/Error/ErrorModal";
 
 import {
   Table,
@@ -36,7 +37,7 @@ const LeagueData = props => {
     dispatch(actions.getLeagueData(leagueId));
   }, [leagueId, dispatch]);
 
-  let content = error ? <h3>access to the fpl api denied</h3> : <Spinner />;
+  let content = error ? <ErrorModal /> : <Spinner />;
 
   if (!loading && !error) {
     const leagueTable = standings.map(player => {

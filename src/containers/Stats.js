@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../store/actions/index";
 import Spinner from "../components/UI/Spinner/Spinner";
+import ErrorModal from "../components/UI/Error/ErrorModal";
 import StatsCard from "../components/UI/StatsCard/StatsCard";
 
 const Stats = props => {
@@ -69,7 +70,7 @@ const Stats = props => {
       ></StatsCard>
     );
   } else {
-    return loading ? <Spinner /> : <h3>access to the fpl api denied</h3>;
+    return loading ? <Spinner /> : <ErrorModal />;
   }
 };
 
