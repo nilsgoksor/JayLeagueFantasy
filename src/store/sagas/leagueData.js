@@ -3,16 +3,19 @@ import * as actions from "../actions/index";
 import axios from "../../axios-fantasy";
 
 export function* leagueDataSaga(action) {
+  axios.defaults.headers.get["Content-Type"] =
+    "application/x-www-form-urlencoded";
+
   yield put(actions.getLeagueDataInit());
   const url = "/api/leagues-classic/" + action.leagueId + "/standings/";
-  const config = {
-    headers: {
-      Accept: "application/json",
-      ContentType: "application/json"
-    }
-  };
+  // const config = {
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Content-Type": "application/json"
+  //   }
+  // };
   try {
-    const response = yield axios.get(url, config);
+    const response = yield axios.get(url, { crossdomain: true });
     const leagueName = response.data.league.name;
     const standings = response.data.standings.results;
     const playerInfo = yield standings.map(player => {

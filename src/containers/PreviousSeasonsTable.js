@@ -8,6 +8,7 @@ import {
 } from "../components/styledcomponents/Table";
 
 const previousWinners = [
+  { season: "2017/2018", name: "Ulf Lindgren" },
   { season: "2018/2019", name: "David Tran" },
   { season: "2019/2020", name: "???" }
 ];
