@@ -8,14 +8,15 @@ export function* leagueDataSaga(action) {
 
   yield put(actions.getLeagueDataInit());
   const url = "/api/leagues-classic/" + action.leagueId + "/standings/";
-  // const config = {
-  //   headers: {
-  //     "Access-Control-Allow-Origin": "*",
-  //     "Content-Type": "application/json"
-  //   }
-  // };
+
   try {
-    const response = yield axios.get(url, { crossdomain: true });
+    fetch(
+      "https://fantasy.premierleague.com/api/leagues-classic/848627/standings/"
+    );
+  } catch (error) {}
+
+  try {
+    const response = yield axios.get(url);
     const leagueName = response.data.league.name;
     const standings = response.data.standings.results;
     const playerInfo = yield standings.map(player => {
