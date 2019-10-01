@@ -2,35 +2,34 @@ import React from "react";
 import styled from "styled-components";
 
 const ErrorModal = props => {
-  const url = "https://fantasy.premierleague.com/my-team";
-  const api_url =
-    "https://fantasy.premierleague.com/api/leagues-classic/848627/standings/";
+  const fpl_url = "https://fantasy.premierleague.com/my-team";
+
   const errorTitle = "access to the fpl api denied";
+
+  const openAndCloseApi = () => {
+    const api_url =
+      "https://fantasy.premierleague.com/api/leagues-classic/848627/standings/";
+    const w = window.open(api_url);
+    setTimeout(() => {
+      w.close();
+    }, 100);
+  };
+
   return (
     <React.Fragment>
       <Backdrop />
       <ErrorModalWrapper>
         <h3>{errorTitle}</h3>
         <h5>Make sure you are logged in to fantasy premier league.</h5>
-        <h5>
-          <a
-            rel="noopener noreferrer"
-            href={url}
-            target="_blank"
-            style={{ padding: "10px" }}
-          >
-            <Button>Login to FPL</Button>
-          </a>
-          <h5>Then open this link, close it and refresh this page.</h5>
-          <a
-            rel="noopener noreferrer"
-            href={api_url}
-            target="_blank"
-            style={{ padding: "10px" }}
-          >
-            <Button>Open link</Button>
-          </a>
-        </h5>
+        <Button
+          onClick={() => {
+            window.open(fpl_url);
+          }}
+        >
+          Login to FPL
+        </Button>
+        <h5>Then open this link, close it and refresh this page.</h5>
+        <Button onClick={openAndCloseApi}>Open link</Button>
       </ErrorModalWrapper>
     </React.Fragment>
   );
