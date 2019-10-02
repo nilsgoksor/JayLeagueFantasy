@@ -59,11 +59,11 @@ const Stats = props => {
     playerInfo
   ) {
     const p = playerInfo.find(p => p.id === playerStats[player].player);
-    const name = p ? p.name : "unknown player";
+
     return (
       <StatsCard
         title={playerStats[player].title}
-        player={name}
+        player={p ? p.name : "unknown player"}
         stat={playerStats[player].stat}
         imgSrc={playerStats[player].imgSrc}
         onChangeHandler={() => randomPlayer()}

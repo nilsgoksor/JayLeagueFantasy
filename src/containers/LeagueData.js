@@ -18,19 +18,12 @@ import Spinner from "../components/UI/Spinner/Spinner";
 const LeagueData = props => {
   const dispatch = useDispatch();
 
-  const standings = useSelector(state => {
-    return state.leagueDataReducer.standings;
+  const { standings, loading, error } = useSelector(state => {
+    return state.leagueDataReducer;
   });
 
-  const loading = useSelector(state => {
-    return state.leagueDataReducer.loading;
-  });
-
-  const error = useSelector(state => {
-    return state.leagueDataReducer.error;
-  });
-  const leagueId = useSelector(state => {
-    return state.settingsReducer.leagueId;
+  const { leagueId } = useSelector(state => {
+    return state.settingsReducer;
   });
 
   useEffect(() => {

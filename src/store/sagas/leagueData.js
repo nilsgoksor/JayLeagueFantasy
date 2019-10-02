@@ -3,6 +3,7 @@ import * as actions from "../actions/index";
 import axios from "../../axios-fantasy";
 
 export function* leagueDataSaga(action) {
+  console.log("test");
   axios.defaults.headers.get["Content-Type"] =
     "application/x-www-form-urlencoded";
 

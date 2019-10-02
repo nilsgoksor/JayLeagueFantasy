@@ -1,10 +1,20 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../../store/actions/index";
+
 import styled from "styled-components";
 
 const ErrorModal = props => {
+  const dispatch = useDispatch();
+  const { leagueId } = useSelector(state => {
+    return state.settingsReducer;
+  });
   const fpl_url = "https://fantasy.premierleague.com/my-team";
-
   const errorTitle = "access to the fpl api denied";
+  const errorDescription =
+    "Make sure you are logged in to fantasy premier league.";
+  const errorDescription_2 =
+    "Then open this link, close it and refresh this page.";
 
   const openAndCloseApi = () => {
     const api_url =
@@ -12,15 +22,15 @@ const ErrorModal = props => {
     const w = window.open(api_url);
     setTimeout(() => {
       w.close();
+      dispatch(actions.getLeagueData(leagueId));
     }, 100);
   };
-
   return (
     <React.Fragment>
       <Backdrop />
       <ErrorModalWrapper>
         <h3>{errorTitle}</h3>
-        <h5>Make sure you are logged in to fantasy premier league.</h5>
+        <h5>{errorDescription}</h5>
         <Button
           onClick={() => {
             window.open(fpl_url);
@@ -28,7 +38,7 @@ const ErrorModal = props => {
         >
           Login to FPL
         </Button>
-        <h5>Then open this link, close it and refresh this page.</h5>
+        <h5>{errorDescription_2}</h5>
         <Button onClick={openAndCloseApi}>Open link</Button>
       </ErrorModalWrapper>
     </React.Fragment>
