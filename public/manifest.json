@@ -1,19 +1,32 @@
 {
-  "short_name": "JayLeague",
-  "name": "JayLeague",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "jayleague-favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "favicon-16x16.png",
+      "src": "jayleague-favicon-16x16.png",
       "type": "image/png",
       "sizes": "16x16"
     },
     {
-      "src": "favicon-32x32.png",
+      "src": "jayleague-favicon-32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "glorias-favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "glorias-favicon-16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "glorias-favicon-32x32.png",
       "type": "image/png",
       "sizes": "32x32"
     }

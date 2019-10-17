@@ -6,6 +6,7 @@ export function* playerDataSaga(action) {
   yield put(actions.getPlayerDataInit());
 
   let playerData = [];
+  // eslint-disable-next-line no-unused-vars
   for (const playerId of action.playerIds) {
     const url = "/api/entry/" + playerId + "/history/";
     try {

@@ -8,10 +8,9 @@ export const getLeagueDataInit = (state, action) => {
   return { type: actionTypes.GET_LEAGUEDATA_INIT };
 };
 
-export const getLeagueDataSuccess = (leagueName, standings, playerInfo) => {
+export const getLeagueDataSuccess = (standings, playerInfo) => {
   return {
     type: actionTypes.GET_LEAGUEDATA_SUCCESS,
-    leagueName: leagueName,
     standings: standings,
     playerInfo: playerInfo
   };

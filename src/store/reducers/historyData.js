@@ -2,39 +2,37 @@ import * as actionTypes from "../actions/actiontypes";
 import { updateObject } from "../../shared/utility";
 
 const initialState = {
-  standings: [],
-  playerNames: [],
+  previousWinners: [],
   error: false,
   loading: true
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_LEAGUEDATA_INIT:
-      return getLeaguedataInit(state, action);
-    case actionTypes.GET_LEAGUEDATA_SUCCESS:
-      return getLeaguedataSuccess(state, action);
-    case actionTypes.GET_LEAGUEDATA_FAIL:
-      return getLeaguedataFail(state, action);
+    case actionTypes.GET_HISTORYDATA_INIT:
+      return getHistorydataInit(state, action);
+    case actionTypes.GET_HISTORYDATA_SUCCESS:
+      return getHistorydataSuccess(state, action);
+    case actionTypes.GET_HISTORYDATA_FAIL:
+      return getHistorydataFail(state, action);
     default:
       return state;
   }
 };
 
-const getLeaguedataInit = state => {
+const getHistorydataInit = state => {
   return updateObject(state, { loading: true, error: false });
 };
 
-const getLeaguedataSuccess = (state, action) => {
+const getHistorydataSuccess = (state, action) => {
   return updateObject(state, {
     error: false,
     loading: false,
-    standings: action.standings,
-    playerInfo: action.playerInfo
+    previousWinners: action.previousWinners
   });
 };
 
-const getLeaguedataFail = state => {
+const getHistorydataFail = state => {
   return updateObject(state, { error: true, loading: false });
 };
 

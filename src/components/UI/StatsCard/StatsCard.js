@@ -1,17 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  Button,
+  Text,
+  DescriptionText
+} from "../../styledcomponents/styledcomponents";
 
 const StatsCard = props => {
   return (
     <Card>
       <CardImg src={props.imgSrc}></CardImg>
       <CardContent>
-        <h4>{props.title}</h4>
-        <p>
+        <StyledText>{props.title}</StyledText>
+        <DescriptionText>
           {props.player} - {props.stat}
-        </p>
+        </DescriptionText>
       </CardContent>
-      <CardButton onClick={props.onChangeHandler}>new stat</CardButton>
+      <Button onClick={props.onChangeHandler}>new stat</Button>
     </Card>
   );
 };
@@ -24,12 +29,12 @@ const Card = styled.div`
   text-align: center;
   border-radius: 5px;
 
-  background: #4b8cca;
+  background: ${p => p.theme.theme.color.primary};
+  opacity: 0.8;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
   transition: 0.3s;
 
   &:hover {
-    background: #4b8cca;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
   }
 
@@ -46,16 +51,7 @@ const CardImg = styled.img`
 const CardContent = styled.div`
   padding: 5px;
 `;
-const CardButton = styled.button`
-  background: #f9cdda;
-  height: 40px;
-  width: 100px;
-  border-radius: 5px;
 
-  &:hover {
-    background: #efa948;
-    color: #ffffff;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-  }
+const StyledText = styled(Text)`
+  color: ${p => p.theme.theme.color.secondary};
 `;

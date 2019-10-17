@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../store/actions/index";
 
 import styled from "styled-components";
+import { Title, Text } from "../../styledcomponents/styledcomponents";
 
 const ErrorModal = props => {
   const dispatch = useDispatch();
@@ -10,15 +11,9 @@ const ErrorModal = props => {
     return state.settingsReducer;
   });
   const fpl_url = "https://fantasy.premierleague.com/my-team";
-  const errorTitle = "access to the fpl api denied";
-  const errorDescription =
-    "Make sure you are logged in to fantasy premier league.";
-  const errorDescription_2 =
-    "Then open this link, close it and refresh this page.";
 
   const openAndCloseApi = () => {
-    const api_url =
-      "https://fantasy.premierleague.com/api/leagues-classic/848627/standings/";
+    const api_url = `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/`; //TODO
     const w = window.open(api_url);
     setTimeout(() => {
       w.close();
@@ -29,8 +24,7 @@ const ErrorModal = props => {
     <React.Fragment>
       <Backdrop />
       <ErrorModalWrapper>
-        <h3>{errorTitle}</h3>
-        <h5>{errorDescription}</h5>
+        <Title>you need to login to see this content</Title>
         <Button
           onClick={() => {
             window.open(fpl_url);
@@ -38,8 +32,9 @@ const ErrorModal = props => {
         >
           Login to FPL
         </Button>
-        <h5>{errorDescription_2}</h5>
-        <Button onClick={openAndCloseApi}>Open link</Button>
+        <Link href="#" onClick={openAndCloseApi}>
+          <Text>click here once you've logged in</Text>
+        </Link>
       </ErrorModalWrapper>
     </React.Fragment>
   );
@@ -80,4 +75,9 @@ const Button = styled.button`
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
     cursor: pointer;
   }
+`;
+
+const Link = styled.a`
+  color: #000000;
+  text-decoration: none;
 `;

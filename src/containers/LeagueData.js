@@ -4,16 +4,16 @@ import * as actions from "../store/actions/index";
 import TrendingDown from "@material-ui/icons/TrendingDown";
 import TrendingUp from "@material-ui/icons/TrendingUp";
 import TrendingStale from "@material-ui/icons/Remove";
-import ErrorModal from "../components/UI/Error/ErrorModal";
 
 import {
   Table,
   TableHead,
   TableRow,
   TableData
-} from "../components/styledcomponents/Table";
+} from "../components/styledcomponents/styledcomponents";
 
 import Spinner from "../components/UI/Spinner/Spinner";
+import ErrorModal from "../components/UI/Error/ErrorModal";
 
 const LeagueData = props => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const LeagueData = props => {
   if (!loading && !error) {
     const leagueTable = standings.map(player => {
       return (
-        <TableRow key={player.player_name}>
+        <TableRow key={player.id}>
           <TableData>{player.rank}</TableData>
           <TableData>{player.player_name}</TableData>
           <TableData>{player.entry_name}</TableData>

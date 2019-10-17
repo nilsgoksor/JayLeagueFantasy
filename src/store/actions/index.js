@@ -6,10 +6,17 @@ export {
 } from "./leagueData";
 
 export {
+  getHistoryData,
+  getHistoryDataInit,
+  getHistoryDataSuccess,
+  getHistoryDataFail
+} from "./historyData";
+
+export {
   getPlayerData,
   getPlayerDataInit,
   getPlayerDataSuccess,
   getPlayerDataFail
 } from "./playerData";
 
-export { setTabVal } from "./settings";
+export { setTabVal, setLeagueInfo, resetLeagueInfo } from "./settings";

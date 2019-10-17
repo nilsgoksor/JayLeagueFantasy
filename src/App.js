@@ -1,75 +1,88 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import styled, { keyframes } from "styled-components";
-
-import LeagueData from "./containers/LeagueData";
-import Stats from "./containers/Stats";
-import PreviousSeasonsTable from "./containers/PreviousSeasonsTable";
-import NavTabs from "./components/UI/NavTabs";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import LeagueSelector from "./containers/LeagueSelector";
+import League from "./containers/League";
 
 const App = () => {
-  const currentTabValue = useSelector(state => {
-    return state.settingsReducer.tabValue;
+  const { leagueId, leagueName } = useSelector(state => {
+    return state.settingsReducer;
   });
-  const leagueName = useSelector(state => {
-    return state.leagueDataReducer.leagueName;
-  });
+  const [routes, setRoutes] = useState();
+  const [theme, setTheme] = useState();
 
-  let content = null;
-  let tabName = "";
-  if (currentTabValue === 0) {
-    content = <LeagueData />;
-    tabName = "current table";
-  }
-  if (currentTabValue === 1) {
-    content = <Stats />;
-    tabName = "some league stats";
-  }
-  if (currentTabValue === 2) {
-    content = <PreviousSeasonsTable />;
-    tabName = "previous season winners";
-  }
+  useEffect(() => {
+    if (leagueId && leagueId.length !== 0) {
+      setRoutes(
+        <Switch>
+          <Route path="/" exact component={LeagueSelector}></Route>
+          <Route path="/League" component={League}></Route>
+        </Switch>
+      );
+    } else {
+      setRoutes(
+        <Switch>
+          <Route path="/" exact component={LeagueSelector}></Route>
+        </Switch>
+      );
+    }
+    setTheme(getLeagueTheme(leagueName));
+  }, [leagueId, leagueName]);
 
   return (
     <React.Fragment>
-      <NavTabs></NavTabs>
-      <React.Fragment>
-        <h1>{leagueName}</h1>
-        <AppLogo src={process.env.PUBLIC_URL + "/logo.jpg"} alt="logo" />
-        <h1>{tabName}</h1>
-      </React.Fragment>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        {content}
-      </div>
+      <ThemeProvider theme={{ theme }}>
+        <Router>{routes}</Router>
+      </ThemeProvider>
     </React.Fragment>
   );
 };
-
 export default App;
 
-const rotate360 = keyframes`
-  from {
-    transform: rotate(0deg);
+const getLeagueTheme = leagueName => {
+  let theme;
+  switch (leagueName) {
+    case "jayleague":
+      theme = {
+        color: {
+          background: "#f9cdda",
+          primary: "#000000",
+          secondary: "#ffffff",
+          highlight: "#fbec49"
+        }
+      };
+      break;
+    case "brebrebre":
+      theme = {
+        color: {
+          background: "#BB2852",
+          primary: "#000000",
+          secondary: "#ffffff",
+          highlight: "#fbec49"
+        }
+      };
+      break;
+    case "öl på glorias till vinnaren":
+      theme = {
+        color: {
+          background: "#366B1D",
+          primary: "#000000",
+          secondary: "#ffffff",
+          highlight: "#fbec49"
+        }
+      };
+      break;
+    default:
+      theme = {
+        color: {
+          primary: "#000000",
+          background: "#ffffff",
+          secondary: "#ffffff",
+          highlight: "#fbec49"
+        }
+      };
+      break;
   }
-  to {
-    transform: rotate(360deg);
-  }`;
-const AppLogo = styled.img`
-  animation: ${rotate360} infinite 60s linear;
-  height: 80px;
-  width: 80px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  &:hover {
-    animation: ${rotate360} infinite 1.5s linear;
-  }
-`;
+  return theme;
+};
